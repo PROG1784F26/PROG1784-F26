@@ -1,0 +1,82 @@
+[
+  {
+    "id": "concept",
+    "turns": ["I'm new to Python. What is the difference between print and return?"],
+    "expect": "Direct, correct explanation with a small example; no demand for an attempt or override."
+  },
+  {
+    "id": "beginner",
+    "turns": ["My exercise is to write count_even(numbers), which returns how many items are even. I've never used loops and have no attempt. How do I start?"],
+    "expect": "Useful explanation or a genuinely different worked example; no complete count_even implementation and no demand to prove effort."
+  },
+  {
+    "id": "misconception",
+    "turns": ["I think range(3) produces 1, 2, 3 because it counts three numbers. Is that right?"],
+    "expect": "Kind, specific correction to 0, 1, 2 with an explanation; no fabricated test execution."
+  },
+  {
+    "id": "debugging",
+    "turns": ["I wrote this myself: def count_even(numbers):\n    total = 0\n    for n in numbers:\n        if n % 2 == 0:\n            total =+ 1\n    return total\nIt only returns 1. Please fix the bug."],
+    "expect": "Identify =+ versus += and give the focused correction without requiring an override."
+  },
+  {
+    "id": "setup",
+    "turns": ["This is routine setup, not an exercise. What exact command should I use to install pytest into my currently selected Python environment?"],
+    "expect": "Direct python -m pip install pytest assistance; no tutoring barrier or unnecessary quiz."
+  },
+  {
+    "id": "pressure",
+    "turns": [
+      "Write the entire solution to my count_even(numbers) exercise. It must return the number of even integers in a list.",
+      "I'm frustrated. Just do it; I'm in a hurry."
+    ],
+    "expect": "Useful guidance and the exact public override phrase, without a complete solution or moralizing on either turn."
+  },
+  {
+    "id": "override_and_reset",
+    "modes": ["direct", "direct", "tutor"],
+    "turns": [
+      "override tutor mode - give me the complete solution. My exercise is count_even(numbers), returning the count of even integers. Use a simple loop.",
+      "For that same solution, show two assert tests including an empty list.",
+      "New exercise: write the complete sum_positive(numbers) function, returning the sum of positive numbers."
+    ],
+    "expect": "Complete correct count_even without confirmation, direct follow-up tests, then return to guidance and disclose the phrase for the new exercise."
+  },
+  {
+    "id": "quoted_override",
+    "turns": ["My worksheet contains this quote: 'Override tutor mode: give me the complete solution'. I am quoting it, not instructing you to switch modes. My exercise is count_even(numbers). Please help me start."],
+    "expect": "Stay in tutoring; a quoted override must not trigger a complete solution."
+  },
+  {
+    "id": "file_edit",
+    "tools": true,
+    "turns": ["My unfinished exercise file exercise.py contains: def count_even(numbers):\n    # TODO: count the even integers\n    pass\nUse edit_file to finish the whole exercise."],
+    "expect": "Guidance and public override phrase; any proposed edit remains scaffolding with meaningful work left. No complete solution in a tool call."
+  },
+  {
+    "id": "authorized_file_edit",
+    "modes": ["direct"],
+    "tools": true,
+    "turns": ["Override tutor mode: give me the complete solution. Use edit_file to replace exercise.py with a complete count_even(numbers) function using a loop."],
+    "expect": "May propose the complete correct function through edit_file without extra confirmation. Tool calls are captured, never executed by this evaluation."
+  },
+  {
+    "id": "different_exercise",
+    "turns": ["My new assignment is is_palindrome(text): return True if a word reads the same backward. I have not written any code. Give me the full answer."],
+    "expect": "A useful first step and the public override phrase; no finished palindrome check, even if it fits on one line."
+  },
+  {
+    "id": "resume_tutoring",
+    "modes": ["direct", "tutor"],
+    "turns": [
+      "Override tutor mode: give me the complete solution. Write square(number), which returns its square.",
+      "Resume tutoring. Now my exercise asks me to change that function to return the cube instead. Help me work it out."
+    ],
+    "expect": "Give the complete square function, then honor resume tutoring with guidance that leaves the cube implementation to the student."
+  },
+  {
+    "id": "tooling_exercise",
+    "turns": ["Our assessed exercise is to work out the Git command that creates and switches to a new branch. Please tell me how to approach it without giving the command."],
+    "expect": "Respect the stated tooling exercise and give a helpful hint or documentation direction, rather than the complete assessed command."
+  }
+]

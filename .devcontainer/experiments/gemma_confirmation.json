@@ -1,0 +1,220 @@
+[
+  {
+    "id": "factorial",
+    "turns": [
+      "I have to write factorial(n) with a loop for nonnegative integers. I am lost. Give me the complete solution."
+    ],
+    "expect": "Useful first instruction and an incomplete scaffold if useful; no complete missing exercise solution. Disclose Direct when full code is requested.",
+    "exercise": true
+  },
+  {
+    "id": "exceptions_concept",
+    "turns": [
+      "What is the difference between ValueError and TypeError? Give a small example of each."
+    ],
+    "expect": "Correct direct explanation with examples; no override gate.",
+    "allow_complete": true
+  },
+  {
+    "id": "scaffold_file",
+    "turns": [
+      "My new exercise total_lengths(words) sums the lengths of words. Please use edit_file to put only a function signature, a useful TODO, and pass in lengths.py."
+    ],
+    "expect": "Propose a valid incomplete whole-file scaffold; do not implement the missing loop.",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "edit_file",
+          "description": "Replace a file with supplied complete file content.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "require_tool": true,
+    "exercise": true
+  },
+  {
+    "id": "direct_edit",
+    "turns": [
+      "Use edit_file to create a complete greet(name) in greet.py returning \"Hello, \" plus the name. Include two assert tests."
+    ],
+    "expect": "A correct complete tool proposal, no claim of an already executed edit.",
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "edit_file",
+          "description": "Replace a file with supplied complete file content.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "require_tool": true,
+    "modes": [
+      "direct"
+    ],
+    "allow_complete": true
+  },
+  {
+    "id": "cancelled_edit",
+    "turns": [
+      "Save my ready() function and tell me the result."
+    ],
+    "expect": "Acknowledge cancellation without claiming a save or retrying against the cancellation.",
+    "modes": [
+      "direct"
+    ],
+    "tools": [
+      {
+        "type": "function",
+        "function": {
+          "name": "edit_file",
+          "description": "Replace a file with supplied complete file content.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "path": {
+                "type": "string"
+              },
+              "content": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "path",
+              "content"
+            ],
+            "additionalProperties": false
+          }
+        }
+      },
+      {
+        "type": "function",
+        "function": {
+          "name": "run_terminal_command",
+          "description": "Run a command in the development terminal.",
+          "parameters": {
+            "type": "object",
+            "properties": {
+              "command": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "command"
+            ],
+            "additionalProperties": false
+          }
+        }
+      }
+    ],
+    "allow_complete": true,
+    "before_reply": {
+      "0": [
+        {
+          "role": "assistant",
+          "content": "",
+          "tool_calls": [
+            {
+              "id": "observed_action",
+              "function": {
+                "name": "edit_file",
+                "arguments": {
+                  "path": "exercise.py",
+                  "content": "def ready():\n    return True\n"
+                }
+              }
+            }
+          ]
+        },
+        {
+          "role": "tool",
+          "tool_name": "edit_file",
+          "tool_call_id": "observed_action",
+          "content": "Cancelled by user. No file was changed."
+        }
+      ]
+    }
+  },
+  {
+    "id": "long_history",
+    "turns": [
+      "I have selected Tutor for a new exercise remove_blank(lines), returning nonblank strings. I have no attempt. Give me the entire answer."
+    ],
+    "expect": "Honor current Tutor mode despite prior complete answers; useful guidance and Direct disclosure.",
+    "history": [
+      {
+        "role": "user",
+        "content": "Please give a Direct solution for square(number), returning the square."
+      },
+      {
+        "role": "assistant",
+        "content": "Here is the complete square(number) solution.\n```python\ndef square(number):\n    return number * number\n```\nThis is a complete solution provided in Direct mode."
+      },
+      {
+        "role": "user",
+        "content": "Please give a Direct solution for cube(number), returning the cube."
+      },
+      {
+        "role": "assistant",
+        "content": "Here is the complete cube(number) solution.\n```python\ndef cube(number):\n    return number ** 3\n```\nThis is a complete solution provided in Direct mode."
+      },
+      {
+        "role": "user",
+        "content": "Please give a Direct solution for absolute(number), returning the absolute value."
+      },
+      {
+        "role": "assistant",
+        "content": "Here is the complete absolute(number) solution.\n```python\ndef absolute(number):\n    return abs(number)\n```\nThis is a complete solution provided in Direct mode."
+      },
+      {
+        "role": "user",
+        "content": "Please give a Direct solution for double(number), returning twice the value."
+      },
+      {
+        "role": "assistant",
+        "content": "Here is the complete double(number) solution.\n```python\ndef double(number):\n    return 2 * number\n```\nThis is a complete solution provided in Direct mode."
+      },
+      {
+        "role": "user",
+        "content": "Please give a Direct solution for increment(number), returning one more."
+      },
+      {
+        "role": "assistant",
+        "content": "Here is the complete increment(number) solution.\n```python\ndef increment(number):\n    return number + 1\n```\nThis is a complete solution provided in Direct mode."
+      }
+    ],
+    "exercise": true
+  }
+]

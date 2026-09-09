@@ -1,0 +1,40 @@
+{
+  "name": "PROG1784-F26 Python + Ollama",
+  "dockerComposeFile": ["compose.yaml", "compose.runtime.yaml"],
+  "initializeCommand": [
+    "docker", "run", "--rm", "--user", "0",
+    "--volume", "${localWorkspaceFolder}/.devcontainer:/config:z",
+    "mcr.microsoft.com/devcontainers/python:1-3.13-bookworm",
+    "python", "/config/configure_runtime.py"
+  ],
+  "service": "python",
+  "runServices": ["python", "ollama"],
+  "workspaceFolder": "/workspaces/PROG1784-F26",
+  "remoteUser": "vscode",
+  "userEnvProbe": "none",
+  "remoteEnv": {
+    "VIRTUAL_ENV": "/home/vscode/.venv",
+    "PATH": "/home/vscode/.venv/bin:${containerEnv:PATH}"
+  },
+  "shutdownAction": "stopCompose",
+  "overrideCommand": false,
+  "postCreateCommand": "/home/vscode/.venv/bin/python .devcontainer/setup.py config",
+  "waitFor": "postCreateCommand",
+  "postStartCommand": "/home/vscode/.venv/bin/python .devcontainer/setup.py pull",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-python.debugpy",
+        "charliermarsh.ruff",
+        "Continue.continue"
+      ],
+      "settings": {
+        "remote.extensionKind": {"Continue.continue": ["workspace"]},
+        "python.defaultInterpreterPath": "/home/vscode/.venv/bin/python",
+        "terminal.integrated.defaultProfile.linux": "bash"
+      }
+    }
+  }
+}

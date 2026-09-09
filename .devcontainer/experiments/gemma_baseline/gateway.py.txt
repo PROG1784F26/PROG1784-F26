@@ -1,0 +1,184 @@
+"""Local Ollama adapter: select tutor/direct policy outside the language model."""
+
+import copy
+import json
+import os
+import re
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
+
+import yaml
+
+POLICY = Path(__file__).with_name("tutor_policy.yaml")
+UPSTREAM = os.environ.get("OLLAMA_HOST", "http://ollama:11434").rstrip("/")
+OVERRIDE = "Override tutor mode: give me the complete solution"
+
+
+def selected_mode(body, mode):
+    """A literal first-line shortcut applies only to the latest user turn."""
+    if mode not in {"tutor", "direct"}:
+        raise ValueError("Choose tutor or direct")
+    if not isinstance(body, dict):
+        raise ValueError("Expected a JSON object")
+    messages = body.get("messages")
+    if not isinstance(messages, list) or not messages:
+        raise ValueError("A nonempty messages array is required")
+    if any(not isinstance(message, dict) for message in messages):
+        raise ValueError("Each message must be an object")
+    if mode == "direct":
+        return mode
+    for message in reversed(messages):
+        if message.get("role") == "user":
+            content = message.get("content", "")
+            if isinstance(content, str) and content.strip():
+                first_line = content.strip().splitlines()[0]
+
+                def normalize(value):
+                    return re.sub(r"[^a-z0-9]+", " ", value.lower()).strip()
+
+                # Do not interpret quotes, Markdown blocks, embedded text or urgency.
+                if first_line[:1].isalnum() and normalize(first_line) == normalize(
+                    OVERRIDE
+                ):
+                    return "direct"
+            break
+    return "tutor"
+
+
+def apply_policy(body, mode, policy):
+    """Preserve client instructions/tools; add only the explicitly selected policy."""
+    mode = selected_mode(body, mode)
+    result = copy.deepcopy(body)
+    messages = result.get("messages")
+    if not isinstance(result.get("options", {}), dict):
+        raise ValueError("options must be an object")
+    instructions = policy["common"] + "\n" + policy[mode]
+    if messages[0].get("role") == "system":
+        messages[0]["content"] = messages[0].get("content", "") + "\n\n" + instructions
+    else:
+        messages.insert(0, {"role": "system", "content": instructions})
+    # Continue's Ollama adapter does not forward every sampling option.
+    result.setdefault("options", {}).setdefault("presence_penalty", 0)
+    return result
+
+
+class Handler(BaseHTTPRequestHandler):
+    def send_json(self, status, body):
+        data = json.dumps(body).encode()
+        self.send_response(status)
+        self.send_header("Content-Type", "application/json")
+        self.send_header("Content-Length", str(len(data)))
+        self.end_headers()
+        self.wfile.write(data)
+
+    def do_GET(self):
+        self.forward()
+
+    def do_POST(self):
+        self.forward()
+
+    def forward(self):
+        headers_sent = False
+        if self.path == "/health":
+            self.send_json(200, {"status": "ok"})
+            return
+        pieces = self.path.split("/", 2)
+        if len(pieces) != 3 or pieces[1] not in {"tutor", "direct"}:
+            self.send_json(404, {"error": "Use /tutor/ or /direct/ as the API base"})
+            return
+        mode, endpoint = pieces[1:]
+        allowed = {
+            "api/chat",
+            "api/generate",
+            "api/show",
+            "api/tags",
+            "api/ps",
+            "api/version",
+        }
+        if endpoint not in allowed:
+            self.send_json(
+                404, {"error": "Endpoint not supported by the tutor adapter"}
+            )
+            return
+        try:
+            data = None
+            translate = endpoint == "api/generate"
+            if self.command == "POST":
+                size = int(self.headers.get("Content-Length", "0"))
+                if size < 1 or size > 32 * 1024 * 1024:
+                    raise ValueError("Expected a JSON request smaller than 32 MiB")
+                data = self.rfile.read(size)
+                if endpoint in {"api/chat", "api/generate"}:
+                    policy = yaml.safe_load(POLICY.read_text())
+                    body = json.loads(data)
+                    if translate:
+                        # Continue's completion/Edit path may use generate. Send
+                        # it through chat so raw=true cannot bypass the policy.
+                        # FIM autocomplete has a separate direct Ollama entry.
+                        if not isinstance(body, dict) or not isinstance(
+                            body.get("prompt"), str
+                        ):
+                            raise ValueError("A text prompt is required")
+                        if body.get("suffix") or body.get("context"):
+                            raise ValueError(
+                                "Use the autocomplete endpoint for FIM/legacy context"
+                            )
+                        prompt = body.pop("prompt")
+                        system = body.pop("system", "")
+                        for key in ["raw", "template", "suffix", "context"]:
+                            body.pop(key, None)
+                        body["messages"] = [{"role": "user", "content": prompt}]
+                        if system:
+                            body["messages"].insert(
+                                0, {"role": "system", "content": system}
+                            )
+                        if "images" in body:
+                            body["messages"][-1]["images"] = body.pop("images")
+                        body.setdefault("think", False)
+                        endpoint = "api/chat"
+                    mode = selected_mode(body, mode)
+                    data = json.dumps(apply_policy(body, mode, policy)).encode()
+            request = Request(
+                UPSTREAM + "/" + endpoint,
+                data=data,
+                method=self.command,
+                headers={"Content-Type": "application/json"},
+            )
+            try:
+                response = urlopen(request, timeout=600)
+            except HTTPError as error:
+                response = error
+            with response:
+                self.send_response(response.status)
+                self.send_header(
+                    "Content-Type",
+                    response.headers.get("Content-Type", "application/json"),
+                )
+                self.send_header("X-Course-Mode", mode)
+                self.send_header("Connection", "close")
+                self.end_headers()
+                headers_sent = True
+                for line in response:
+                    if translate and response.status == 200:
+                        chunk = json.loads(line)
+                        message = chunk.pop("message", {})
+                        chunk["response"] = message.get("content", "")
+                        line = json.dumps(chunk).encode() + b"\n"
+                    self.wfile.write(line)
+                    self.wfile.flush()
+        except (ValueError, TypeError, KeyError) as error:
+            if not headers_sent:
+                self.send_json(400, {"error": str(error)})
+        except (URLError, TimeoutError) as error:
+            if not headers_sent:
+                self.send_json(502, {"error": str(error)})
+            # After streaming starts, close the incomplete response. Never send
+            # a second HTTP response or fabricate a successful done event.
+        except (BrokenPipeError, ConnectionResetError):
+            pass  # Closing the upstream response also cancels generation.
+
+
+if __name__ == "__main__":
+    ThreadingHTTPServer(("127.0.0.1", 11435), Handler).serve_forever()

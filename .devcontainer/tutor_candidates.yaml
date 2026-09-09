@@ -1,0 +1,92 @@
+# Optional evaluation candidates, not automatic student downloads.
+# evaluate_tutor.py --candidates combines these with the selected course policy.
+models:
+  - name: Qwen 3 8B
+    model: qwen3:8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: &standard
+      contextLength: 16384
+      maxTokens: 2048
+      temperature: 0.2
+      presencePenalty: 0
+      reasoning: false
+    requestOptions: &timeout
+      timeout: 300
+
+  - name: Gemma 4 E4B QAT (8B total parameters)
+    model: gemma4:e4b-it-qat
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions:
+      <<: *standard
+      temperature: 1
+      topK: 64
+      topP: 0.95
+    requestOptions: *timeout
+
+  - name: Ministral 3 8B
+    model: ministral-3:8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: *standard
+    requestOptions: *timeout
+
+  - name: Mistral 7B Instruct v0.3
+    model: mistral:7b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: *standard
+    requestOptions: *timeout
+
+  - name: Llama 3.1 8B
+    model: llama3.1:8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: *standard
+    requestOptions: *timeout
+
+  - name: Liquid LFM2.5 8B A1B
+    model: lfm2.5:8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions:
+      <<: *standard
+      topK: 80
+      topP: 1
+    requestOptions: *timeout
+
+  - name: IBM Granite 4.2 8B
+    model: granite4.2:8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions:
+      <<: *standard
+      temperature: 1
+      topP: 0.95
+    requestOptions: *timeout
+
+  - name: Phi-4 Mini Instruct 3.8B
+    model: phi4-mini:3.8b
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: *standard
+    requestOptions: *timeout
+
+  - name: Qwen 3.5 4B Q8
+    model: qwen3.5:4b-q8_0
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions: *standard
+    requestOptions: *timeout
+
+  - name: Gemma 4 E4B Q8
+    model: gemma4:e4b-it-q8_0
+    roles: [chat]
+    apiBase: http://ollama:11434
+    defaultCompletionOptions:
+      <<: *standard
+      temperature: 1
+      topK: 64
+      topP: 0.95
+    requestOptions: *timeout

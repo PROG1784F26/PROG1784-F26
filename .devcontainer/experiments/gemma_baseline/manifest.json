@@ -1,0 +1,39 @@
+{
+  "model": {
+    "model": "gemma4:e4b-it-qat",
+    "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+    "download_bytes": 6146501801,
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "gemma4",
+      "families": [
+        "gemma4"
+      ],
+      "parameter_size": "7.5B",
+      "quantization_level": "Q4_0"
+    },
+    "cold_seconds": 16.99,
+    "warm_median_seconds": 9.879,
+    "warm_tokens_per_second": 14.22,
+    "warm_first_content_seconds": 0.173,
+    "context": 16384,
+    "size_vram": 0,
+    "finish_reasons": [
+      "stop",
+      "stop",
+      "stop"
+    ],
+    "output_tokens": [
+      138,
+      138,
+      138
+    ]
+  },
+  "files": {
+    "continue.yaml": "ec968d7b834e345c811560c7cedbdfa09c921687fe971bdb3a2f9d16b9746cf5",
+    "gateway.py.txt": "106d7829fc49aeda934de95ed7a7c602b5eb9138e5dea40dd7b3e03c7842d39f",
+    "policy.yaml": "9a5e9fff2f6ad8f88bdcbf8c931b130bd819d647a7d77e1a8327795385feeb78"
+  },
+  "notes": "Baseline snapshots taken before reliability optimization. Prior measured model digest; verify against current server before promotion."
+}

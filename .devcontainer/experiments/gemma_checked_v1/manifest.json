@@ -1,0 +1,7 @@
+{
+  "notes": "Holdout checked implementation before narrowing reminder repairs and adding named-tool edit claims. Role/type and TLS robustness fixes during runs did not affect the recorded model replies.",
+  "files": {
+    "tutor_gateway.py.txt": "0d4a5066e6ceba2a222ed1893e20456ce4277f09c70aa4bd7a59d1058857facf",
+    "tutor_checks.py.txt": "9c572dbe89dd39be9434bdf8f91338c226ca504d614eef434530525c11838cfa"
+  }
+}

@@ -1,0 +1,819 @@
+{
+  "date": "2026-09-08 America/Toronto",
+  "host": "Intel Core i9-13900H, 32 GiB physical RAM; NVIDIA RTX 5000 Ada Laptop GPU 16 GiB, driver 580.159.03; Linux x86-64, Podman 5.8.2 via docker, Ollama 0.33.3; Intel Iris Xe RPL-P integrated GPU via Vulkan with OLLAMA_IGPU_ENABLE=1",
+  "method": "Fixed neutral prompt, 16384 context allocated, 256 output-token cap, temperature 0.2, seed 42, think false; first request after model unload, then two warm repeated prompts. OS disk cache not cleared. CPU and GPU runs sequential. Not a quality benchmark.",
+  "backends": {
+    "cpu": [
+      {
+        "model": "qwen3.5:4b",
+        "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+        "download_bytes": 3389983735,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 12.461,
+        "warm_median_seconds": 7.864,
+        "warm_tokens_per_second": 14.0,
+        "warm_first_content_seconds": 0.151,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          108,
+          108,
+          108
+        ]
+      },
+      {
+        "model": "qwen3.5:4b-q8_0",
+        "digest": "8722f47c2791e6554c3244d2444b433c6241eed92d2093b53ef105626a6dcb36",
+        "download_bytes": 5279294453,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q8_0"
+        },
+        "cold_seconds": 16.45,
+        "warm_median_seconds": 10.613,
+        "warm_tokens_per_second": 10.57,
+        "warm_first_content_seconds": 0.186,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          110,
+          110,
+          110
+        ]
+      },
+      {
+        "model": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "download_bytes": 6146501801,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "cold_seconds": 16.99,
+        "warm_median_seconds": 9.879,
+        "warm_tokens_per_second": 14.22,
+        "warm_first_content_seconds": 0.173,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          138,
+          138,
+          138
+        ]
+      },
+      {
+        "model": "gemma4:e4b-it-q8_0",
+        "digest": "9dcc35808b42e8975f1e9dd9d7866925a8d0704b6bb3613525323f355dde3923",
+        "download_bytes": 11636116476,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q8_0"
+        },
+        "cold_seconds": 20.521,
+        "warm_median_seconds": 13.47,
+        "warm_tokens_per_second": 9.6,
+        "warm_first_content_seconds": 0.24,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          127,
+          127,
+          127
+        ]
+      },
+      {
+        "model": "qwen3-vl:8b-instruct",
+        "digest": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+        "download_bytes": 6140415975,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3vl",
+          "families": [
+            "qwen3vl"
+          ],
+          "parameter_size": "8.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 23.58,
+        "warm_median_seconds": 14.955,
+        "warm_tokens_per_second": 8.36,
+        "warm_first_content_seconds": 0.124,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          124,
+          124,
+          124
+        ]
+      },
+      {
+        "model": "qwen3:8b",
+        "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "download_bytes": 5225388164,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "8.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 20.574,
+        "warm_median_seconds": 13.042,
+        "warm_tokens_per_second": 8.22,
+        "warm_first_content_seconds": 0.14,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          102,
+          106,
+          106
+        ]
+      },
+      {
+        "model": "ministral-3:8b",
+        "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+        "download_bytes": 6022236616,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "mistral3",
+          "families": [
+            "mistral3"
+          ],
+          "parameter_size": "8.9B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 45.134,
+        "warm_median_seconds": 17.503,
+        "warm_tokens_per_second": 7.72,
+        "warm_first_content_seconds": 0.138,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          133,
+          134,
+          134
+        ]
+      },
+      {
+        "model": "mistral:7b",
+        "digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "download_bytes": 4372824384,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 21.858,
+        "warm_median_seconds": 15.186,
+        "warm_tokens_per_second": 9.16,
+        "warm_first_content_seconds": 0.115,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          138,
+          138,
+          138
+        ]
+      },
+      {
+        "model": "llama3.1:8b",
+        "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+        "download_bytes": 4920753328,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 24.613,
+        "warm_median_seconds": 17.171,
+        "warm_tokens_per_second": 8.62,
+        "warm_first_content_seconds": 0.126,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          147,
+          147,
+          147
+        ]
+      },
+      {
+        "model": "lfm2.5:8b",
+        "digest": "9cf756159fc2f3b9128c6a3f544ec90c5e9b8afdbb4179a57b8aea9de589cfb2",
+        "download_bytes": 5156075525,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "lfm2moe",
+          "families": [
+            "lfm2moe"
+          ],
+          "parameter_size": "8.5B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 13.201,
+        "warm_median_seconds": 7.298,
+        "warm_tokens_per_second": 35.4,
+        "warm_first_content_seconds": 0.065,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "length",
+          "length",
+          "length"
+        ],
+        "output_tokens": [
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "model": "granite4.2:8b",
+        "digest": "f586c02fdecdf151b656207c339aa003997345774a41768bac1fd6d2fb85913b",
+        "download_bytes": 5347929757,
+        "details": {
+          "parent_model": "/Users/runner/.ollama/models/blobs/sha256-16a9369d0805f80b7377d25d87f937a90c05dc04ad79173a52001e42c9aab311",
+          "format": "gguf",
+          "family": "granite",
+          "families": [
+            "granite"
+          ],
+          "parameter_size": "8.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 27.425,
+        "warm_median_seconds": 20.007,
+        "warm_tokens_per_second": 7.7,
+        "warm_first_content_seconds": 0.143,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          153,
+          153,
+          153
+        ]
+      },
+      {
+        "model": "phi4-mini:3.8b",
+        "digest": "78fad5d182a7c33065e153a5f8ba210754207ba9d91973f57dffa7f487363753",
+        "download_bytes": 2491876774,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "phi3",
+          "families": [
+            "phi3"
+          ],
+          "parameter_size": "3.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 12.071,
+        "warm_median_seconds": 8.209,
+        "warm_tokens_per_second": 16.71,
+        "warm_first_content_seconds": 0.068,
+        "context": 16384,
+        "size_vram": 0,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          136,
+          136,
+          136
+        ]
+      }
+    ],
+    "gpu": [
+      {
+        "model": "qwen3.5:4b",
+        "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+        "download_bytes": 3389983735,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 5.95,
+        "warm_median_seconds": 1.275,
+        "warm_tokens_per_second": 103.54,
+        "warm_first_content_seconds": 0.058,
+        "context": 16384,
+        "size_vram": 3627171183,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          126,
+          126,
+          126
+        ]
+      },
+      {
+        "model": "qwen3.5:4b-q8_0",
+        "digest": "8722f47c2791e6554c3244d2444b433c6241eed92d2093b53ef105626a6dcb36",
+        "download_bytes": 5279294453,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q8_0"
+        },
+        "cold_seconds": 9.614,
+        "warm_median_seconds": 1.647,
+        "warm_tokens_per_second": 75.11,
+        "warm_first_content_seconds": 0.049,
+        "context": 16384,
+        "size_vram": 5462944644,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          120,
+          120,
+          120
+        ]
+      },
+      {
+        "model": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "download_bytes": 6146501801,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "cold_seconds": 8.493,
+        "warm_median_seconds": 1.317,
+        "warm_tokens_per_second": 97.14,
+        "warm_first_content_seconds": 0.029,
+        "context": 16384,
+        "size_vram": 3244598230,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          133,
+          125,
+          125
+        ]
+      },
+      {
+        "model": "gemma4:e4b-it-q8_0",
+        "digest": "9dcc35808b42e8975f1e9dd9d7866925a8d0704b6bb3613525323f355dde3923",
+        "download_bytes": 11636116476,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q8_0"
+        },
+        "cold_seconds": 8.999,
+        "warm_median_seconds": 1.96,
+        "warm_tokens_per_second": 66.16,
+        "warm_first_content_seconds": 0.04,
+        "context": 16384,
+        "size_vram": 5266703645,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          127,
+          127,
+          127
+        ]
+      },
+      {
+        "model": "qwen3-vl:8b-instruct",
+        "digest": "0533d74300e4f9bc367d675d4e64ffd073d50ff16a2b4096cc2e8a1cf8c96319",
+        "download_bytes": 6140415975,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3vl",
+          "families": [
+            "qwen3vl"
+          ],
+          "parameter_size": "8.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 11.48,
+        "warm_median_seconds": 2.205,
+        "warm_tokens_per_second": 66.43,
+        "warm_first_content_seconds": 0.022,
+        "context": 16384,
+        "size_vram": 7760919920,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          145,
+          145,
+          145
+        ]
+      },
+      {
+        "model": "qwen3:8b",
+        "digest": "500a1f067a9f782620b40bee6f7b0c89e17ae61f686b92c24933e4ca4b2b8b41",
+        "download_bytes": 5225388164,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen3",
+          "families": [
+            "qwen3"
+          ],
+          "parameter_size": "8.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 7.467,
+        "warm_median_seconds": 1.648,
+        "warm_tokens_per_second": 65.28,
+        "warm_first_content_seconds": 0.025,
+        "context": 16384,
+        "size_vram": 7520177356,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          106,
+          106,
+          106
+        ]
+      },
+      {
+        "model": "ministral-3:8b",
+        "digest": "1922accd5827ebe6829e536369195db25eaf664528dc66206d646ea3bb386b71",
+        "download_bytes": 6022236616,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "mistral3",
+          "families": [
+            "mistral3"
+          ],
+          "parameter_size": "8.9B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 9.319,
+        "warm_median_seconds": 2.167,
+        "warm_tokens_per_second": 62.55,
+        "warm_first_content_seconds": 0.025,
+        "context": 16384,
+        "size_vram": 7496888482,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          134,
+          134,
+          134
+        ]
+      },
+      {
+        "model": "mistral:7b",
+        "digest": "6577803aa9a036369e481d648a2baebb381ebc6e897f2bb9a766a2aa7bfbc1cf",
+        "download_bytes": 4372824384,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "7.2B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 6.592,
+        "warm_median_seconds": 1.756,
+        "warm_tokens_per_second": 74.55,
+        "warm_first_content_seconds": 0.026,
+        "context": 16384,
+        "size_vram": 6704112598,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          125,
+          129,
+          129
+        ]
+      },
+      {
+        "model": "llama3.1:8b",
+        "digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
+        "download_bytes": 4920753328,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "llama",
+          "families": [
+            "llama"
+          ],
+          "parameter_size": "8.0B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 7.428,
+        "warm_median_seconds": 2.277,
+        "warm_tokens_per_second": 68.95,
+        "warm_first_content_seconds": 0.029,
+        "context": 16384,
+        "size_vram": 7024945397,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          155,
+          155,
+          155
+        ]
+      },
+      {
+        "model": "lfm2.5:8b",
+        "digest": "9cf756159fc2f3b9128c6a3f544ec90c5e9b8afdbb4179a57b8aea9de589cfb2",
+        "download_bytes": 5156075525,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "lfm2moe",
+          "families": [
+            "lfm2moe"
+          ],
+          "parameter_size": "8.5B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 6.823,
+        "warm_median_seconds": 1.173,
+        "warm_tokens_per_second": 221.18,
+        "warm_first_content_seconds": 0.016,
+        "context": 16384,
+        "size_vram": 5487774923,
+        "finish_reasons": [
+          "length",
+          "length",
+          "length"
+        ],
+        "output_tokens": [
+          256,
+          256,
+          256
+        ]
+      },
+      {
+        "model": "granite4.2:8b",
+        "digest": "f586c02fdecdf151b656207c339aa003997345774a41768bac1fd6d2fb85913b",
+        "download_bytes": 5347929757,
+        "details": {
+          "parent_model": "/Users/runner/.ollama/models/blobs/sha256-16a9369d0805f80b7377d25d87f937a90c05dc04ad79173a52001e42c9aab311",
+          "format": "gguf",
+          "family": "granite",
+          "families": [
+            "granite"
+          ],
+          "parameter_size": "8.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 7.915,
+        "warm_median_seconds": 2.276,
+        "warm_tokens_per_second": 60.87,
+        "warm_first_content_seconds": 0.026,
+        "context": 16384,
+        "size_vram": 8038687702,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          137,
+          137,
+          137
+        ]
+      },
+      {
+        "model": "phi4-mini:3.8b",
+        "digest": "78fad5d182a7c33065e153a5f8ba210754207ba9d91973f57dffa7f487363753",
+        "download_bytes": 2491876774,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "phi3",
+          "families": [
+            "phi3"
+          ],
+          "parameter_size": "3.8B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 9.73,
+        "warm_median_seconds": 1.244,
+        "warm_tokens_per_second": 115.63,
+        "warm_first_content_seconds": 0.015,
+        "context": 16384,
+        "size_vram": 4790513827,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          142,
+          142,
+          142
+        ]
+      }
+    ],
+    "intel_vulkan": [
+      {
+        "model": "qwen3.5:4b",
+        "digest": "2a654d98e6fba55d452b7043684e9b57a947e393bbffa62485a7aac05ee4eefd",
+        "download_bytes": 3389983735,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "qwen35",
+          "families": [
+            "qwen35"
+          ],
+          "parameter_size": "4.7B",
+          "quantization_level": "Q4_K_M"
+        },
+        "cold_seconds": 15.617,
+        "warm_median_seconds": 9.554,
+        "warm_tokens_per_second": 13.45,
+        "warm_first_content_seconds": 0.185,
+        "context": 16384,
+        "size_vram": 3660830472,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          126,
+          126,
+          126
+        ]
+      },
+      {
+        "model": "gemma4:e4b-it-qat",
+        "digest": "ee665637121887cf3befff38abbb1be4ee117c7db867d97a67e29049ecd7e15f",
+        "download_bytes": 6146501801,
+        "details": {
+          "parent_model": "",
+          "format": "gguf",
+          "family": "gemma4",
+          "families": [
+            "gemma4"
+          ],
+          "parameter_size": "7.5B",
+          "quantization_level": "Q4_0"
+        },
+        "cold_seconds": 21.309,
+        "warm_median_seconds": 12.595,
+        "warm_tokens_per_second": 11.57,
+        "warm_first_content_seconds": 0.23,
+        "context": 16384,
+        "size_vram": 3288617451,
+        "finish_reasons": [
+          "stop",
+          "stop",
+          "stop"
+        ],
+        "output_tokens": [
+          121,
+          143,
+          143
+        ]
+      }
+    ]
+  }
+}
