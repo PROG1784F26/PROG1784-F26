@@ -134,15 +134,16 @@ to confirm it runs in the remote/container extension host.
 Install [Git](https://git-scm.com/downloads) in the environment where you will
 clone; for the WSL workflow, Git must also be available inside that WSL distribution.
 
-Use the Git repository URL supplied by your instructor. Replace `REPOSITORY_URL`
-in the following command with that URL; it is a placeholder, not a working address.
+The course repository is [PROG1784F26/PROG1784-F26](https://github.com/PROG1784F26/PROG1784-F26).
 Run the clone command from the directory where you keep your course folders.
+If your instructor assigns a personal fork or a different repository, substitute
+that repository URL.
 
 **Host terminal:**
 
 ```text
 git --version
-git clone "REPOSITORY_URL" PROG1784-F26
+git clone https://github.com/PROG1784F26/PROG1784-F26.git PROG1784-F26
 cd PROG1784-F26
 code .
 ```
@@ -657,6 +658,34 @@ The starter does not include assignment tests; pytest reports no tests until you
 add files such as `test_exercise.py`. Use the Testing sidebar once tests exist.
 
 ## Troubleshooting and stopping
+
+### Moved checkout or an error mentioning an old folder
+
+If the log shows `getxattr ... no such file or directory` for a previous checkout
+location, the existing Python container still has that old host folder mounted.
+A normal reopen can reuse it with `--no-recreate`; building the image alone does
+not update an existing container's mount. This can also happen when switching
+between clones because the default Compose project name is `prog1784f26`.
+Use one active course checkout per engine with this default configuration.
+
+Close the failed devcontainer window. In a **host terminal**, change to the
+current repository folder and remove the old course containers:
+
+```text
+docker compose -f .devcontainer/compose.yaml down
+```
+
+This stops/removes the two course containers and their network. It preserves your
+host checkout and the downloaded models in the named volume; do **not** add
+`--volumes`. Container-only changes, such as packages installed without adding
+them to `requirements-dev.txt`, are removed with the containers.
+
+Open the current folder in VS Code and run **Dev Containers: Reopen in Container**.
+It will recreate the containers with the current mount. The generated build-file
+warnings in a stale container's labels do not mean you need to recreate those
+old temporary files. Keep the uppercase course folder name; it is not the cause.
+
+### Other problems
 
 - **`docker` or `docker compose` not found:** finish the engine's CLI/Compose
   setup, reopen the host terminal, and verify both commands from the environment
